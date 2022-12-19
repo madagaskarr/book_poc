@@ -20,19 +20,16 @@ class _ChapterReaderState extends State<ChapterReader> {
   void initState() {
     _scrollController = ScrollController();
 
-
-
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == 0) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(
-              duration: Duration(milliseconds: 300),
-              content: Text("reach the top")));
-      } else if (_scrollController.position.maxScrollExtent == _scrollController.position.pixels) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(
-              duration: Duration(milliseconds: 300),
-              content: Text("reach the bottom")));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(milliseconds: 300),
+            content: Text("reach the top")));
+      } else if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(milliseconds: 300),
+            content: Text("reach the bottom")));
       }
     });
     super.initState();
@@ -56,24 +53,28 @@ class _ChapterReaderState extends State<ChapterReader> {
             itemBuilder: ((context, index) {
               double fontSize = 0;
               FontWeight fontWeight = FontWeight.normal;
+              Color textColor = MColor.yellow;
 
               switch (widget.paragraphs[index].style) {
                 case ParagraphStyle.Heading:
                   {
                     fontSize = 32;
                     fontWeight = FontWeight.bold;
+                    textColor = MColor.yellow;
                     break;
                   }
                 case ParagraphStyle.SubHeading:
                   {
                     fontSize = 20;
                     fontWeight = FontWeight.w400;
+                    textColor = MColor.offWhite;
                     break;
                   }
                 case ParagraphStyle.Paragraph:
                   {
-                    fontSize = 13;
+                    fontSize = 15;
                     fontWeight = FontWeight.w700;
+                    textColor = MColor.offWhite;
                     break;
                   }
               }
@@ -86,7 +87,7 @@ class _ChapterReaderState extends State<ChapterReader> {
                   style: TextStyle(
                       fontSize: fontSize,
                       fontWeight: fontWeight,
-                      color: MColor.offWhite),
+                      color: textColor),
                 ),
               );
             })),
