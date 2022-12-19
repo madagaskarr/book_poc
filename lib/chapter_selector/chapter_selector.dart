@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:manuscript_reader_flutter/reader/chapter_reader.dart';
+
+import '../utils.dart';
 
 class ChapterSelector extends StatefulWidget {
   final List<ChapterModel> chapters;
@@ -18,7 +22,7 @@ class _ChapterSelectorState extends State<ChapterSelector> {
   Widget build(BuildContext context) {
     return Stack(children: [
       AnimatedContainer(
-        color: Colors.redAccent,
+        color: MColor.darkBlack,
         width: _menuBarWidth,
         duration: const Duration(milliseconds: 300),
         child: ListView.builder(
@@ -29,9 +33,16 @@ class _ChapterSelectorState extends State<ChapterSelector> {
                 child: SizedBox(
                   width: 120,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(MColor.blue)),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 4, top: 4, bottom: 4),
-                      child: Text(widget.chapters[index].title, textAlign: TextAlign.center,),
+                      padding: const EdgeInsets.only(
+                          left: 4, right: 4, top: 4, bottom: 4),
+                      child: Text(
+                        widget.chapters[index].title,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     onPressed: () {
                       widget.onChapterSelected(widget.chapters[index].id);
@@ -43,14 +54,15 @@ class _ChapterSelectorState extends State<ChapterSelector> {
       ),
       Positioned(
           bottom: 64,
+          width: 64,
+          height: 64,
           left: 16,
-          right: 16,
           child: Container(
               color: Colors.black,
               child: TextButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.yellow)),
+                          MaterialStateProperty.all(MColor.offWhite)),
                   onPressed: () {
                     setState(() {
                       if (_menuBarWidth == 350) {
